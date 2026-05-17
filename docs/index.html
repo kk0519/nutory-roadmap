@@ -17,6 +17,7 @@
     --red:     #ff7b72;
     --orange:  #f97316;
     --teal:    #2dd4bf;
+    --blue:    #58a6ff;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -45,31 +46,116 @@
     border-bottom: 1px solid var(--border); padding-bottom: 6px;
   }
 
-  /* Stat cards */
+  /* ─── NOW / NEXT / FUTURE 3カラム ─── */
+  .status-3col {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 4px;
+  }
+  .status-box {
+    border-radius: 8px; padding: 18px 20px;
+    border: 1px solid var(--border);
+  }
+  .status-box.now  { background: #0d2818; border-color: var(--accent); }
+  .status-box.next { background: #1e1a00; border-color: var(--yellow); }
+  .status-box.future { background: #0d1117; border-color: var(--border); }
+  .status-box .stitle {
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 8px; font-weight: bold;
+  }
+  .status-box.now  .stitle { color: var(--accent); }
+  .status-box.next .stitle { color: var(--yellow); }
+  .status-box.future .stitle { color: var(--muted); }
+  .status-box h3 { font-size: 14px; margin-bottom: 10px; }
+  .status-box .item {
+    display: flex; align-items: flex-start; gap: 7px;
+    padding: 4px 0; font-size: 12px; color: var(--muted);
+    border-bottom: 1px solid #21262d;
+  }
+  .status-box .item:last-child { border-bottom: none; }
+  .status-box.now  .item { color: var(--text); }
+  .status-box .item .num {
+    flex-shrink: 0; background: var(--border); border-radius: 3px;
+    padding: 0 5px; font-size: 10px; color: var(--muted); margin-top: 2px;
+  }
+  .status-box.now .item .num { background: #1a4731; color: var(--accent); }
+
+  /* ─── 全体進捗バー ─── */
+  .overall-progress {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px; margin-bottom: 4px;
+  }
+  .overall-progress .label {
+    display: flex; justify-content: space-between;
+    color: var(--muted); font-size: 11px; margin-bottom: 8px;
+  }
+  .overall-progress .pct-val { color: var(--accent); font-weight: bold; font-size: 13px; }
+  .bar { background: var(--border); border-radius: 4px; height: 8px; }
+  .bar-fill { background: var(--accent); border-radius: 4px; height: 100%; transition: width .5s; }
+
+  /* ─── ユーザー確認・決定事項 ─── */
+  .decision-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;
+  }
+  .decision-card {
+    border-radius: 8px; padding: 16px 18px;
+    border: 1px solid;
+  }
+  .decision-card.open   { background: #1e1200; border-color: var(--yellow); }
+  .decision-card.done   { background: #0d2818; border-color: var(--green); opacity: 0.8; }
+  .decision-card .dlabel {
+    font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 6px; font-weight: bold;
+  }
+  .decision-card.open .dlabel { color: var(--yellow); }
+  .decision-card.done .dlabel { color: var(--green); }
+  .decision-card .dtitle { font-size: 13px; margin-bottom: 8px; }
+  .decision-card .dai {
+    font-size: 11px; color: var(--teal); margin-top: 8px;
+    padding-top: 8px; border-top: 1px solid #21262d;
+    line-height: 1.6;
+  }
+  .decision-card .dval {
+    font-size: 12px; color: var(--text); font-weight: bold;
+  }
+
+  /* ─── Stat cards ─── */
   .stat-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px;
   }
   .stat-card {
     background: var(--card); border: 1px solid var(--border); border-radius: 8px;
     padding: 16px 20px;
   }
   .stat-card .label { color: var(--muted); font-size: 11px; margin-bottom: 6px; }
-  .stat-card .value { font-size: 26px; font-weight: bold; color: var(--accent); }
+  .stat-card .value { font-size: 24px; font-weight: bold; color: var(--accent); }
   .stat-card .sub   { color: var(--muted); font-size: 11px; margin-top: 4px; }
 
-  /* Phase cards */
+  /* ─── Concept box ─── */
+  .concept-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 20px 24px; margin-bottom: 8px;
+  }
+  .concept-box h2 { color: var(--accent); font-size: 15px; margin-bottom: 10px; }
+  .concept-box p  { color: var(--muted); font-size: 12px; line-height: 1.9; }
+  .concept-box .kv { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .concept-box .kv-item { background: #0d1117; border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 14px; font-size: 12px; }
+  .concept-box .kv-item .k { color: var(--muted); font-size: 10px; margin-bottom: 2px; }
+  .concept-box .kv-item .v { color: var(--text); font-weight: bold; }
+
+  /* ─── Phase cards ─── */
   .phase-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px;
   }
   .phase-card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-    padding: 20px; position: relative;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px;
   }
-  .phase-card.active { border-color: var(--accent); }
+  .phase-card.active { border-color: var(--yellow); }
   .phase-card.done   { border-color: #238636; opacity: 0.85; }
   .phase-card h3 {
-    font-size: 13px; margin-bottom: 8px;
-    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
   }
   .phase-num {
     border-radius: 4px; padding: 1px 7px;
@@ -79,69 +165,58 @@
   .phase-num.wip  { background: var(--yellow); color: #000; }
   .phase-num.done { background: var(--green);  color: #000; }
   .phase-num.future { background: var(--border); color: var(--muted); }
-
-  .phase-desc {
-    color: var(--muted); font-size: 11px;
-    margin-bottom: 12px; line-height: 1.7;
+  .phase-desc { color: var(--muted); font-size: 11px; margin-bottom: 10px; line-height: 1.7; }
+  .phase-date { font-size: 10px; color: var(--teal); margin-bottom: 8px; }
+  .remaining-count {
+    display: inline-block; font-size: 10px; padding: 1px 7px;
+    background: #1c1c2e; border: 1px solid var(--teal);
+    border-radius: 10px; color: var(--teal); margin-left: auto;
   }
-  .phase-date {
-    font-size: 10px; color: var(--teal);
-    margin-bottom: 10px;
-  }
+  .remaining-count.zero { background: #0d2818; border-color: var(--green); color: var(--green); }
 
   .task { display: flex; align-items: flex-start; gap: 8px; padding: 3px 0;
           color: var(--muted); font-size: 12px; }
-  .task.done { color: var(--text); }
+  .task.done  { color: var(--text); }
   .task .icon { flex-shrink: 0; margin-top: 1px; }
   .task.done .icon { color: var(--green); }
-  .task.wip  .icon { color: var(--yellow); }
 
   .progress-bar {
     background: var(--border); border-radius: 4px; height: 4px; margin-top: 14px;
   }
   .progress-fill {
-    background: var(--accent); border-radius: 4px; height: 100%;
-    transition: width .5s ease;
+    background: var(--accent); border-radius: 4px; height: 100%; transition: width .5s;
   }
   .pct { color: var(--muted); font-size: 10px; margin-top: 4px; text-align: right; }
 
-  /* Badge */
+  /* badge */
   .badge {
-    display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 12px;
-    margin-left: 6px; font-weight: bold;
+    display: inline-block; font-size: 10px; padding: 2px 8px;
+    border-radius: 12px; font-weight: bold;
   }
-  .badge.now    { background: #1a4731; color: var(--green); border: 1px solid var(--green); }
+  .badge.now    { background: #1a4731; color: var(--green);  border: 1px solid var(--green); }
   .badge.next   { background: #2d2000; color: var(--yellow); border: 1px solid var(--yellow); }
-  .badge.future { background: #1c1c2e; color: var(--teal); border: 1px solid var(--teal); }
+  .badge.future { background: #1c1c2e; color: var(--teal);   border: 1px solid var(--teal); }
 
-  /* Concept box */
-  .concept-box {
-    background: var(--card); border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: 8px; padding: 20px 24px; margin-bottom: 8px;
-  }
-  .concept-box h2 { color: var(--accent); font-size: 16px; margin-bottom: 10px; }
-  .concept-box p  { color: var(--muted); font-size: 12px; line-height: 1.9; }
-  .concept-box .kv { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
-  .concept-box .kv-item { background: #0d1117; border: 1px solid var(--border);
-    border-radius: 6px; padding: 8px 14px; font-size: 12px; }
-  .concept-box .kv-item .k { color: var(--muted); font-size: 10px; margin-bottom: 2px; }
-  .concept-box .kv-item .v { color: var(--text); font-weight: bold; }
-
-  /* Timeline bar */
+  /* timeline */
   .timeline {
-    display: flex; gap: 0; margin-bottom: 8px; border-radius: 6px; overflow: hidden;
-    border: 1px solid var(--border);
+    display: flex; gap: 0; margin-bottom: 8px; border-radius: 6px;
+    overflow: hidden; border: 1px solid var(--border);
   }
   .tl-seg {
     height: 28px; display: flex; align-items: center; justify-content: center;
-    font-size: 10px; font-weight: bold; flex-shrink: 0;
+    font-size: 10px; font-weight: bold; flex-shrink: 0; text-align: center;
   }
 
   footer {
     border-top: 1px solid var(--border); padding: 16px 32px;
     display: flex; justify-content: space-between;
     color: var(--muted); font-size: 11px; margin-top: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .status-3col { grid-template-columns: 1fr; }
+    main { padding: 16px; }
+    header { padding: 12px 16px; }
   }
 </style>
 </head>
@@ -150,18 +225,187 @@
 <header>
   <div>
     <h1>🍚 MESHILOG</h1>
-    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.0</div>
+    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.2</div>
   </div>
   <div class="ts">
-    <div><span class="dot"></span>Planning Phase</div>
+    <div><span class="dot"></span>Ph.0 — コンセプト確定中</div>
     <div style="margin-top:4px">Updated: 2026-05-17</div>
   </div>
 </header>
 
 <main>
 
-  <!-- Concept -->
-  <div class="section-title">プロジェクト概要</div>
+  <!-- ══════════════════════════════════
+       NOW / NEXT / FUTURE
+  ══════════════════════════════════ -->
+  <div class="section-title">📍 現在地 — 今できること / 次のこと / 将来のこと</div>
+  <div class="status-3col">
+
+    <div class="status-box now">
+      <div class="stitle">🟢 NOW — 今すぐできること（Ph.0）</div>
+      <h3 style="color:var(--accent)">残り1タスクで Ph.0 完了</h3>
+      <div class="item">
+        <span class="num">1</span>
+        <span><b>マネタイズモデルを決定する</b><br>
+        freemium / 月額 / 広告モデルの選択（AI推奨：freemium先行）</span>
+      </div>
+      <div class="item">
+        <span class="num">2</span>
+        <span>開発体制を決める（個人 or チーム）<br>
+        → AI推奨：個人でMVP→反応見てチーム化</span>
+      </div>
+      <div class="item">
+        <span class="num">3</span>
+        <span>デザインカラー方針を決める<br>
+        → AI推奨：緑ベース＋オレンジアクセント</span>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--accent)">
+        ✅ 上記を決定 → Ph.1 に着手可能
+      </div>
+    </div>
+
+    <div class="status-box next">
+      <div class="stitle">🟡 NEXT — 次のフェーズ（Ph.1）</div>
+      <h3 style="color:var(--yellow)">設計・UI/UX（Month 1〜2）</h3>
+      <div class="item"><span class="num">1</span><span>Figma でワイヤーフレーム作成</span></div>
+      <div class="item"><span class="num">2</span><span>技術スタック決定（SwiftUI 推奨）</span></div>
+      <div class="item"><span class="num">3</span><span>栄養DB スキーマ設計</span></div>
+      <div class="item"><span class="num">4</span><span>JANコードDB 調査・選定</span></div>
+      <div class="item"><span class="num">5</span><span>開発環境構築（Xcode / GitHub）</span></div>
+      <div style="margin-top:12px;font-size:11px;color:var(--yellow)">
+        ⏳ Ph.0 完了後に着手
+      </div>
+    </div>
+
+    <div class="status-box future">
+      <div class="stitle">🔵 FUTURE — 将来フェーズ（Ph.2〜Ph.8）</div>
+      <h3 style="color:var(--muted)">開発 → ベータ → ローンチ → 成長</h3>
+      <div class="item"><span class="num">Ph.2</span><span>コア開発 MVP（Month 2-4）</span></div>
+      <div class="item"><span class="num">Ph.3</span><span>コンビニ・QR決済自動連携（Month 4-6）</span></div>
+      <div class="item"><span class="num">Ph.4</span><span>TestFlight ベータ（Month 6-8）</span></div>
+      <div class="item"><span class="num">Ph.5</span><span>App Store ローンチ（Month 8-10）🎯</span></div>
+      <div class="item"><span class="num">Ph.6-8</span><span>成長・マネタイズ・Android対応</span></div>
+      <div style="margin-top:12px;font-size:11px;color:var(--muted)">
+        残タスク合計：<b style="color:var(--text)">42タスク</b>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════
+       全体進捗
+  ══════════════════════════════════ -->
+  <div class="section-title">📊 全体進捗</div>
+  <div class="overall-progress">
+    <div class="label">
+      <span>プロジェクト全体進捗（Ph.0〜Ph.8 / 全49タスク）</span>
+      <span class="pct-val">10% 完了</span>
+    </div>
+    <div class="bar"><div class="bar-fill" style="width:10%"></div></div>
+    <div style="display:flex;gap:20px;margin-top:10px;font-size:11px;color:var(--muted)">
+      <span>✅ 完了：<b style="color:var(--green)">5タスク</b></span>
+      <span>🔜 残り：<b style="color:var(--yellow)">44タスク</b></span>
+      <span>🎯 現在フェーズ：<b style="color:var(--accent)">Ph.0（67%）</b></span>
+      <span>📅 App Store目標：<b style="color:var(--text)">2027年3月</b></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════
+       ユーザー確認・決定事項
+  ══════════════════════════════════ -->
+  <div class="section-title">⚠️ ユーザー確認・決定事項（オーナー判断待ち）</div>
+  <div class="decision-grid">
+
+    <div class="decision-card done">
+      <div class="dlabel">✅ 確定済み</div>
+      <div class="dtitle">アプリ名（仮称）</div>
+      <div class="dval">Meshilog（メシログ）</div>
+      <div class="dai">確定日：2026-05-17</div>
+    </div>
+
+    <div class="decision-card done">
+      <div class="dlabel">✅ 確定済み</div>
+      <div class="dtitle">ファーストターゲット</div>
+      <div class="dval">一人暮らし 20-30代（iPhone）</div>
+      <div class="dai">家族プランは v2 以降。Android は Ph.8。</div>
+    </div>
+
+    <div class="decision-card done">
+      <div class="dlabel">✅ 確定済み</div>
+      <div class="dtitle">差別化コンセプト</div>
+      <div class="dval">コンビニ3社 + QR決済 自動連携</div>
+      <div class="dai">手動入力率を80%削減。マネフォ方式を栄養に適用。</div>
+    </div>
+
+    <div class="decision-card open">
+      <div class="dlabel">❓ 要決定</div>
+      <div class="dtitle">マネタイズモデル</div>
+      <div class="dval" style="color:var(--yellow)">未決定</div>
+      <div class="dai">
+        選択肢：<br>
+        A) <b>freemium</b>（無料＋Premium ¥480/月）<br>
+        B) 完全無料＋広告<br>
+        C) 初月無料 → 月額のみ<br>
+        → <b style="color:var(--teal)">AI推奨：A) freemium</b>（初期ユーザ獲得を最優先）
+      </div>
+    </div>
+
+    <div class="decision-card open">
+      <div class="dlabel">❓ 要決定</div>
+      <div class="dtitle">開発体制</div>
+      <div class="dval" style="color:var(--yellow)">未決定</div>
+      <div class="dai">
+        選択肢：<br>
+        A) <b>個人開発</b>でMVP → 反応後にチーム化<br>
+        B) 最初からチーム編成（エンジニア+デザイナー）<br>
+        C) 外注（開発会社委託）<br>
+        → <b style="color:var(--teal)">AI推奨：A) 個人MVP先行</b>（コスト最小・ピボット容易）
+      </div>
+    </div>
+
+    <div class="decision-card open">
+      <div class="dlabel">❓ 要決定</div>
+      <div class="dtitle">UIデザインカラー</div>
+      <div class="dval" style="color:var(--yellow)">未決定</div>
+      <div class="dai">
+        選択肢：<br>
+        A) <b>緑ベース＋オレンジアクセント</b>（健康×食欲）<br>
+        B) 白ベース＋緑（清潔・シンプル系）<br>
+        C) ダーク＋オレンジ（スタイリッシュ系）<br>
+        → <b style="color:var(--teal)">AI推奨：A)</b>（ヘルス感＋食欲訴求の両立）
+      </div>
+    </div>
+
+    <div class="decision-card open">
+      <div class="dlabel">❓ 要決定</div>
+      <div class="dtitle">アプリ名（正式名称）</div>
+      <div class="dval" style="color:var(--yellow)">仮称のまま</div>
+      <div class="dai">
+        現在は「Meshilog（メシログ）」仮称。<br>
+        正式名称確定のタイミング：<br>
+        → <b style="color:var(--teal)">AI推奨：Ph.4（ベータ前）</b>に確定（App Store申請必要）
+      </div>
+    </div>
+
+    <div class="decision-card open">
+      <div class="dlabel">❓ 要決定</div>
+      <div class="dtitle">バックエンド構成</div>
+      <div class="dval" style="color:var(--yellow)">未決定</div>
+      <div class="dai">
+        選択肢：<br>
+        A) <b>Firebase</b>（低コスト・速い）<br>
+        B) AWS / GCP（スケーラブル・複雑）<br>
+        C) Supabase（OSS・中間）<br>
+        → <b style="color:var(--teal)">AI推奨：A) Firebase</b>（MVP段階はコスト・速度優先）
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════
+       プロジェクト概要
+  ══════════════════════════════════ -->
+  <div class="section-title">📋 プロジェクト概要</div>
   <div class="concept-box">
     <h2>栄養の家計簿 — Meshilog（メシログ）</h2>
     <p>
@@ -173,95 +417,116 @@
       <div class="kv-item"><div class="k">アプリ名（仮称）</div><div class="v">Meshilog（メシログ）</div></div>
       <div class="kv-item"><div class="k">プロジェクト名</div><div class="v">NutriLedger</div></div>
       <div class="kv-item"><div class="k">ターゲット</div><div class="v">一人暮らし 20-30代（先行）</div></div>
-      <div class="kv-item"><div class="k">プラットフォーム</div><div class="v">iPhone（iOS） → Android</div></div>
+      <div class="kv-item"><div class="k">プラットフォーム</div><div class="v">iPhone（iOS） → Android（Ph.8）</div></div>
       <div class="kv-item"><div class="k">差別化</div><div class="v">コンビニ3社 + PayPay/LINE Pay 自動連携</div></div>
       <div class="kv-item"><div class="k">目標自動化率</div><div class="v">食事記録の 80%以上</div></div>
+      <div class="kv-item"><div class="k">App Store目標</div><div class="v">2027年3月（Month 10）</div></div>
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="section-title">マイルストーン サマリー</div>
+  <!-- ══════════════════════════════════
+       サマリーstat
+  ══════════════════════════════════ -->
+  <div class="section-title">📈 マイルストーン サマリー</div>
   <div class="stat-grid">
     <div class="stat-card">
-      <div class="label">総フェーズ数</div>
+      <div class="label">総フェーズ</div>
       <div class="value">9</div>
       <div class="sub">Ph.0 〜 Ph.8</div>
     </div>
     <div class="stat-card">
       <div class="label">現在フェーズ</div>
       <div class="value" style="color:var(--yellow)">Ph.0</div>
-      <div class="sub">コンセプト確定</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">MVP目標</div>
-      <div class="value">3ヶ月</div>
-      <div class="sub">Ph.1〜Ph.2完了</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">App Store 申請目標</div>
-      <div class="value">10ヶ月</div>
-      <div class="sub">Ph.5 ローンチ</div>
-    </div>
-    <div class="stat-card">
-      <div class="label">Android 対応</div>
-      <div class="value">18ヶ月</div>
-      <div class="sub">Ph.8 マルチプラット</div>
+      <div class="sub">コンセプト確定（67%）</div>
     </div>
     <div class="stat-card">
       <div class="label">完了タスク</div>
-      <div class="value" style="color:var(--green)">3</div>
-      <div class="sub">全体の 5%</div>
+      <div class="value" style="color:var(--green)">5</div>
+      <div class="sub">全49タスク中</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">残タスク</div>
+      <div class="value" style="color:var(--orange)">44</div>
+      <div class="sub">今フェーズの残り：1</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">MVP目標</div>
+      <div class="value">Month 4</div>
+      <div class="sub">Ph.2完了（2026年9月）</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">ローンチ目標</div>
+      <div class="value">Month 10</div>
+      <div class="sub">App Store（2027年3月）</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">決定待ち事項</div>
+      <div class="value" style="color:var(--yellow)">5</div>
+      <div class="sub">Ph.1着手前に要決定</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Android対応</div>
+      <div class="value">Month 16+</div>
+      <div class="sub">Ph.8（2027年9月〜）</div>
     </div>
   </div>
 
-  <!-- Timeline -->
-  <div class="section-title">タイムライン（概算）</div>
+  <!-- ══════════════════════════════════
+       タイムライン
+  ══════════════════════════════════ -->
+  <div class="section-title">📅 タイムライン（概算）</div>
   <div class="timeline">
-    <div class="tl-seg" style="width:6%;background:#1a4731;color:var(--green)">Ph.0<br><span style="font-size:9px">M0-1</span></div>
-    <div class="tl-seg" style="width:11%;background:#2d2000;color:var(--yellow)">Ph.1<br><span style="font-size:9px">M1-2</span></div>
-    <div class="tl-seg" style="width:17%;background:#1c1c2e;color:var(--teal)">Ph.2<br><span style="font-size:9px">M2-4</span></div>
-    <div class="tl-seg" style="width:17%;background:#1c1c2e;color:var(--teal)">Ph.3<br><span style="font-size:9px">M4-6</span></div>
-    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.4<br><span style="font-size:9px">M6-8</span></div>
-    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.5<br><span style="font-size:9px">M8-10</span></div>
-    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.6<br><span style="font-size:9px">M10-13</span></div>
-    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.7<br><span style="font-size:9px">M13-16</span></div>
-    <div class="tl-seg" style="width:5%;background:#1c1c2e;color:var(--teal)">Ph.8<br><span style="font-size:9px">M16+</span></div>
+    <div class="tl-seg" style="width:6%;background:#0d2818;color:var(--green)">Ph.0<br><span style="font-size:9px">M0-1</span></div>
+    <div class="tl-seg" style="width:6%;background:#1e1a00;color:var(--yellow)">Ph.1<br><span style="font-size:9px">M1-2</span></div>
+    <div class="tl-seg" style="width:12%;background:#1c1c2e;color:var(--teal)">Ph.2 MVP<br><span style="font-size:9px">M2-4</span></div>
+    <div class="tl-seg" style="width:12%;background:#1c1c2e;color:var(--teal)">Ph.3 連携<br><span style="font-size:9px">M4-6</span></div>
+    <div class="tl-seg" style="width:12%;background:#1c1c2e;color:var(--teal)">Ph.4 β<br><span style="font-size:9px">M6-8</span></div>
+    <div class="tl-seg" style="width:12%;background:#1a1a0d;color:var(--orange)">Ph.5 🚀<br><span style="font-size:9px">M8-10</span></div>
+    <div class="tl-seg" style="width:13%;background:#1c1c2e;color:var(--teal)">Ph.6 成長<br><span style="font-size:9px">M10-13</span></div>
+    <div class="tl-seg" style="width:13%;background:#1c1c2e;color:var(--teal)">Ph.7 💰<br><span style="font-size:9px">M13-16</span></div>
+    <div class="tl-seg" style="width:14%;background:#1c1c2e;color:var(--teal)">Ph.8 🌏Android<br><span style="font-size:9px">M16+</span></div>
   </div>
 
-  <!-- Phases -->
-  <div class="section-title">フェーズ詳細</div>
+  <!-- ══════════════════════════════════
+       フェーズ詳細
+  ══════════════════════════════════ -->
+  <div class="section-title">🗂️ フェーズ詳細（全タスク）</div>
   <div class="phase-grid">
 
     <!-- Ph.0 -->
     <div class="phase-card done">
       <h3>
         <span class="phase-num done">Ph.0</span>
-        🔍 コンセプト確定 <span class="badge now">✅ 完了</span>
+        🔍 コンセプト確定
+        <span class="badge now">進行中</span>
+        <span class="remaining-count">残 1</span>
       </h3>
       <div class="phase-date">Month 0〜1（2026年5月）</div>
-      <div class="phase-desc">市場調査・競合分析・ターゲット定義・アプリコンセプトの確定フェーズ。</div>
-      <div class="task done"><span class="icon">✅</span><span>市場調査：日本の栄養管理アプリの現状分析</span></div>
+      <div class="phase-desc">市場調査・競合分析・ターゲット定義・アプリコンセプトの確定。</div>
+      <div class="task done"><span class="icon">✅</span><span>市場調査：日本の栄養管理アプリ現状分析</span></div>
       <div class="task done"><span class="icon">✅</span><span>競合分析：あすけん・カロミル・MyFitnessPalの弱点特定</span></div>
       <div class="task done"><span class="icon">✅</span><span>ターゲット確定：一人暮らし20-30代 → 家族プランはv2</span></div>
       <div class="task done"><span class="icon">✅</span><span>差別化コンセプト確定：コンビニ×QR決済×栄養自動化</span></div>
       <div class="task done"><span class="icon">✅</span><span>アプリ名（仮称）確定：<b>Meshilog（メシログ）</b></span></div>
-      <div class="task"><span class="icon">⬜</span><span>マネタイズモデル決定（月額/freemium）</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
-      <div class="pct">4/6 — 67%</div>
+      <div class="task"><span class="icon">⬜</span><span><b>マネタイズモデル決定</b>（freemium推奨）← 要オーナー判断</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:83%"></div></div>
+      <div class="pct">5/6 — 83%</div>
     </div>
 
     <!-- Ph.1 -->
     <div class="phase-card active">
       <h3>
         <span class="phase-num wip">Ph.1</span>
-        🎨 設計・UI/UX <span class="badge next">🔜 次フェーズ</span>
+        🎨 設計・UI/UX
+        <span class="badge next">次フェーズ</span>
+        <span class="remaining-count">残 6</span>
       </h3>
       <div class="phase-date">Month 1〜2（2026年6月〜7月）</div>
-      <div class="phase-desc">技術スタック選定・Figmaによる画面設計・栄養DBの構造設計。</div>
-      <div class="task"><span class="icon">⬜</span><span>技術スタック決定（SwiftUI + Swift / バックエンド設計）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>Figmaにて主要画面のワイヤーフレーム作成</span></div>
-      <div class="task"><span class="icon">⬜</span><span>カロリー・PFC（タンパク質/脂質/炭水化物）DBスキーマ設計</span></div>
-      <div class="task"><span class="icon">⬜</span><span>JANコード（バーコード）DBの調査・採用候補選定</span></div>
+      <div class="phase-desc">技術スタック選定・Figma画面設計・栄養DBスキーマ設計。</div>
+      <div class="task"><span class="icon">⬜</span><span>技術スタック決定（SwiftUI + Firebase 推奨）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Figma にて主要画面ワイヤーフレーム作成</span></div>
+      <div class="task"><span class="icon">⬜</span><span>カロリー・PFCスキーマ設計</span></div>
+      <div class="task"><span class="icon">⬜</span><span>JANコードDB の調査・採用候補選定</span></div>
       <div class="task"><span class="icon">⬜</span><span>「栄養の家計簿ダッシュボード」UI設計</span></div>
       <div class="task"><span class="icon">⬜</span><span>開発環境構築（Xcode / GitHub / CI）</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
@@ -272,17 +537,19 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.2</span>
-        📱 コア開発（MVP）<span class="badge future">予定</span>
+        📱 コア開発 MVP
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 7</span>
       </h3>
       <div class="phase-date">Month 2〜4（2026年7月〜9月）</div>
-      <div class="phase-desc">SwiftUIによるiOSアプリ骨格・バーコードスキャン・基本栄養トラッキング機能の実装。</div>
-      <div class="task"><span class="icon">⬜</span><span>SwiftUI アプリ骨格構築（画面遷移・タブ構成）</span></div>
+      <div class="phase-desc">SwiftUI アプリ骨格・バーコードスキャン・基本栄養トラッキング実装。</div>
+      <div class="task"><span class="icon">⬜</span><span>SwiftUI アプリ骨格（画面遷移・タブ）</span></div>
       <div class="task"><span class="icon">⬜</span><span>バーコードスキャナー実装（AVFoundation）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>JANコード→栄養素DB検索機能</span></div>
+      <div class="task"><span class="icon">⬜</span><span>JANコード → 栄養素DB検索</span></div>
       <div class="task"><span class="icon">⬜</span><span>食事記録・一覧表示機能</span></div>
       <div class="task"><span class="icon">⬜</span><span>栄養ダッシュボード（今日の栄養収支）実装</span></div>
-      <div class="task"><span class="icon">⬜</span><span>ローカルDB（Core Data / SQLite）設計・実装</span></div>
-      <div class="task"><span class="icon">⬜</span><span>TestFlight内部テスト開始</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ローカルDB（Core Data / SQLite）実装</span></div>
+      <div class="task"><span class="icon">⬜</span><span>TestFlight 内部テスト開始</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/7 — 0%</div>
     </div>
@@ -291,17 +558,19 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.3</span>
-        🔗 データ自動連携 <span class="badge future">予定</span>
+        🔗 データ自動連携
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 8</span>
       </h3>
       <div class="phase-date">Month 4〜6（2026年9月〜11月）</div>
-      <div class="phase-desc">マネフォ方式の核心：コンビニ・QR決済・外食チェーンとの自動連携実装。手動入力を80%削減。</div>
+      <div class="phase-desc">コンビニ3社・QR決済・外食チェーン自動連携。手動入力80%削減が目標。</div>
       <div class="task"><span class="icon">⬜</span><span>セブン-イレブン（7iD / nanaco）購入履歴連携</span></div>
       <div class="task"><span class="icon">⬜</span><span>ファミリーマート（ファミペイ）購入履歴連携</span></div>
       <div class="task"><span class="icon">⬜</span><span>ローソン（Ponta）購入履歴連携</span></div>
-      <div class="task"><span class="icon">⬜</span><span>PayPay 決済連携（飲食店名検知 → 通知）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>PayPay 決済連携（店名検知 → 1タップ記録）</span></div>
       <div class="task"><span class="icon">⬜</span><span>LINE Pay 決済連携</span></div>
-      <div class="task"><span class="icon">⬜</span><span>外食チェーンDB構築（マクドナルド・松屋・吉野家等 top 30）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>GPS＋時刻による飲食店自動検出（「松屋にいますか？」通知）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>外食チェーンDB構築（top 30 チェーン）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>GPS＋時刻による飲食店自動検出</span></div>
       <div class="task"><span class="icon">⬜</span><span>Uber Eats / 出前館 注文履歴連携</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/8 — 0%</div>
@@ -311,15 +580,17 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.4</span>
-        🧪 ベータテスト <span class="badge future">予定</span>
+        🧪 ベータテスト
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 6</span>
       </h3>
       <div class="phase-date">Month 6〜8（2026年11月〜2027年1月）</div>
-      <div class="phase-desc">TestFlight公開・ユーザフィードバック収集・DB精度向上・App Store準備。</div>
+      <div class="phase-desc">TestFlight 公開・フィードバック収集・DB精度向上・App Store準備。</div>
       <div class="task"><span class="icon">⬜</span><span>TestFlight ベータ公開（招待制 50名）</span></div>
       <div class="task"><span class="icon">⬜</span><span>ユーザフィードバック収集・分析</span></div>
-      <div class="task"><span class="icon">⬜</span><span>栄養DB精度向上（誤認識・欠損データ修正）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養DB精度向上（誤認識・欠損修正）</span></div>
       <div class="task"><span class="icon">⬜</span><span>パフォーマンス最適化（バッテリー・通信量）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>App Storeメタデータ準備（説明文・スクリーンショット）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>App Store メタデータ準備</span></div>
       <div class="task"><span class="icon">⬜</span><span>プライバシーポリシー・利用規約作成</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/6 — 0%</div>
@@ -329,14 +600,16 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.5</span>
-        🚀 App Store ローンチ <span class="badge future">予定</span>
+        🚀 App Store ローンチ
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 6</span>
       </h3>
-      <div class="phase-date">Month 8〜10（2027年1月〜3月）</div>
-      <div class="phase-desc">v1.0 正式リリース。マーケティング・SNS展開・プレスリリース。</div>
+      <div class="phase-date">Month 8〜10（2027年1月〜3月）🎯ゴール</div>
+      <div class="phase-desc">v1.0 正式リリース。SNS展開・インフルエンサーPR・プレスリリース。</div>
       <div class="task"><span class="icon">⬜</span><span>App Store 申請・審査対応</span></div>
-      <div class="task"><span class="icon">⬜</span><span>v1.0 正式リリース（無料 + Premiumプラン）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>SNSアカウント開設（X / Instagram）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>インフルエンサー・ヘルス系YouTuberへのPR</span></div>
+      <div class="task"><span class="icon">⬜</span><span>v1.0 正式リリース（freemium）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>SNS アカウント開設（X / Instagram）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ヘルス系インフルエンサーへのPR</span></div>
       <div class="task"><span class="icon">⬜</span><span>プレスリリース配信</span></div>
       <div class="task"><span class="icon">⬜</span><span>ASO（App Store最適化）対応</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
@@ -347,14 +620,16 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.6</span>
-        📊 ユーザ継続・機能拡充 <span class="badge future">予定</span>
+        📊 ユーザ継続・機能拡充
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 5</span>
       </h3>
       <div class="phase-date">Month 10〜13（2027年3月〜6月）</div>
-      <div class="phase-desc">リテンション向上・週次レポート・目標設定機能の拡充。</div>
+      <div class="phase-desc">リテンション向上・週次レポート・目標設定・Apple Health連携。</div>
       <div class="task"><span class="icon">⬜</span><span>週次・月次 栄養レポート自動生成</span></div>
-      <div class="task"><span class="icon">⬜</span><span>栄養目標設定機能（ダイエット / 筋肉増量 / 健康維持）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>プッシュ通知（食事記録リマインダー・栄養アドバイス）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>写真AIによる食事認識機能（Vision API）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養目標設定（ダイエット / 増量 / 維持）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>プッシュ通知（記録リマインダー・栄養アドバイス）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>写真AI食事認識（Vision API）</span></div>
       <div class="task"><span class="icon">⬜</span><span>Apple Health 連携（歩数・消費カロリー）</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/5 — 0%</div>
@@ -364,14 +639,16 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.7</span>
-        💰 マネタイズ強化 <span class="badge future">予定</span>
+        💰 マネタイズ強化
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 5</span>
       </h3>
       <div class="phase-date">Month 13〜16（2027年6月〜9月）</div>
       <div class="phase-desc">サブスクリプション最適化・家族プラン・外部パートナーシップ。</div>
-      <div class="task"><span class="icon">⬜</span><span>Premium月額プラン最適化（¥480/月 目標）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>家族プラン実装（¥680/月 〜 4名まで）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>ジム・フィットネスクラブとのパートナーシップ</span></div>
-      <div class="task"><span class="icon">⬜</span><span>栄養士・管理栄養士による監修コンテンツ追加</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Premium 月額プラン最適化（¥480/月 目標）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>家族プラン実装（¥680/月 〜 4名）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ジム・フィットネスとのパートナーシップ</span></div>
+      <div class="task"><span class="icon">⬜</span><span>管理栄養士監修コンテンツ追加</span></div>
       <div class="task"><span class="icon">⬜</span><span>食品メーカー・コンビニとのタイアップ広告</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/5 — 0%</div>
@@ -381,14 +658,16 @@
     <div class="phase-card">
       <h3>
         <span class="phase-num future">Ph.8</span>
-        🌏 マルチプラットフォーム <span class="badge future">予定</span>
+        🌏 マルチプラットフォーム
+        <span class="badge future">予定</span>
+        <span class="remaining-count">残 5</span>
       </h3>
       <div class="phase-date">Month 16〜（2027年9月〜）</div>
-      <div class="phase-desc">Android版・Apple Watch・Web版・グローバル展開。</div>
-      <div class="task"><span class="icon">⬜</span><span>Android版開発（React Native or Flutter）</span></div>
+      <div class="phase-desc">Android・Apple Watch・Web版・グローバル展開。</div>
+      <div class="task"><span class="icon">⬜</span><span>Android 版開発（React Native or Flutter）</span></div>
       <div class="task"><span class="icon">⬜</span><span>Apple Watch コンパニオンアプリ</span></div>
-      <div class="task"><span class="icon">⬜</span><span>Web版ダッシュボード（PC閲覧対応）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>多言語対応（英語・中国語）→ グローバル展開</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Web版ダッシュボード（PC対応）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>多言語対応（英語・中国語）→ グローバル</span></div>
       <div class="task"><span class="icon">⬜</span><span>AI栄養アドバイザー機能（Claude API統合）</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/5 — 0%</div>
@@ -396,21 +675,11 @@
 
   </div><!-- /phase-grid -->
 
-  <!-- Questions section -->
-  <div class="section-title">未決定事項（オーナー判断待ち）</div>
-  <div class="concept-box" style="border-left-color: var(--yellow)">
-    <h2 style="color:var(--yellow)">📋 決定待ち項目</h2>
-    <div class="task done" style="padding:6px 0"><span class="icon" style="color:var(--green)">✅</span><span style="color:var(--text)">アプリ名：<b>Meshilog（メシログ）</b>— 確定済み（2026-05-17）</span></div>
-    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">マネタイズ：月額サブスク or freemium → AI推奨：<b>freemium先行</b>（初期ユーザ獲得優先）</span></div>
-    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">開発体制：個人開発 or チーム → AI推奨：<b>個人MVP先行</b>→ 市場反応後にチーム化</span></div>
-    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">デザインカラー：緑系（健康）or オレンジ系（食欲）→ AI推奨：<b>緑ベース＋オレンジアクセント</b></span></div>
-  </div>
-
 </main>
 
 <footer>
-  <span>PROJECT NutriLedger v1.1 &nbsp;—&nbsp; Meshilog（メシログ）App Roadmap</span>
-  <span>Target: iPhone / iOS &nbsp;|&nbsp; 2026-05-17</span>
+  <span>PROJECT NutriLedger v1.2 &nbsp;—&nbsp; Meshilog（メシログ）App Roadmap</span>
+  <span>Target: iPhone / iOS &nbsp;|&nbsp; Last updated: 2026-05-17</span>
 </footer>
 
 </body>
