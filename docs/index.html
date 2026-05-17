@@ -213,12 +213,82 @@
     color: var(--muted); font-size: 11px; margin-top: 40px;
   }
 
+  /* ─── Theme Switcher ─── */
+  .theme-bar {
+    background: #010409; border-bottom: 1px solid var(--border);
+    padding: 10px 32px; display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .theme-bar .tlabel {
+    color: var(--muted); font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; flex-shrink: 0;
+  }
+  .theme-btn {
+    display: flex; align-items: center; gap: 8px;
+    padding: 6px 16px; border-radius: 20px; cursor: pointer;
+    border: 2px solid var(--border); background: var(--card);
+    color: var(--muted); font-size: 12px; font-family: inherit;
+    transition: all .2s; white-space: nowrap;
+  }
+  .theme-btn:hover { border-color: var(--accent); color: var(--text); }
+  .theme-btn.active {
+    border-color: var(--accent); color: var(--text);
+    background: #0d2818;
+  }
+  .theme-btn .swatch {
+    width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+  }
+  .theme-btn .tag {
+    background: var(--border); border-radius: 3px;
+    padding: 1px 5px; font-size: 10px; color: var(--muted);
+  }
+  .theme-btn.active .tag {
+    background: var(--accent); color: #000;
+  }
+
   @media (max-width: 768px) {
     .status-3col { grid-template-columns: 1fr; }
     main { padding: 16px; }
     header { padding: 12px 16px; }
+    .theme-bar { flex-wrap: wrap; padding: 10px 16px; }
   }
 </style>
+
+<script>
+const themes = {
+  A: { accent: '#22c55e', green: '#3fb950', name: 'エメラルドグリーン', activeBg: '#0d2818' },
+  B: { accent: '#f97316', green: '#fb923c', name: 'アンバーオレンジ',   activeBg: '#1e0f00' },
+  C: { accent: '#facc15', green: '#fbbf24', name: 'ゴールド',           activeBg: '#1a1500' },
+  D: { accent: '#e2e8f0', green: '#cbd5e1', name: 'ホワイト',           activeBg: '#1a1f2e' },
+};
+function applyTheme(key) {
+  const t = themes[key];
+  const root = document.documentElement;
+  root.style.setProperty('--accent', t.accent);
+  root.style.setProperty('--green',  t.green);
+  // update dot + progress + active-bg on active buttons
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.theme === key);
+    if (btn.dataset.theme === key) {
+      btn.style.background = t.activeBg;
+      btn.style.borderColor = t.accent;
+    } else {
+      btn.style.background = '';
+      btn.style.borderColor = '';
+    }
+  });
+  // update bar-fill color
+  document.querySelectorAll('.bar-fill, .progress-fill').forEach(el => {
+    el.style.background = t.accent;
+  });
+  // store selection
+  localStorage.setItem('meshilog-theme', key);
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('meshilog-theme') || 'A';
+  applyTheme(saved);
+});
+</script>
 </head>
 <body>
 
@@ -232,6 +302,37 @@
     <div style="margin-top:4px">Updated: 2026-05-17</div>
   </div>
 </header>
+
+<!-- ── Theme Switcher Bar ── -->
+<div class="theme-bar">
+  <span class="tlabel">🎨 配色切替</span>
+
+  <button class="theme-btn active" data-theme="A" onclick="applyTheme('A')">
+    <span class="swatch" style="background:#22c55e"></span>
+    <span class="tag">A</span>
+    黒 ＋ エメラルドグリーン
+  </button>
+
+  <button class="theme-btn" data-theme="B" onclick="applyTheme('B')">
+    <span class="swatch" style="background:#f97316"></span>
+    <span class="tag">B</span>
+    黒 ＋ アンバーオレンジ
+  </button>
+
+  <button class="theme-btn" data-theme="C" onclick="applyTheme('C')">
+    <span class="swatch" style="background:#facc15"></span>
+    <span class="tag">C</span>
+    黒 ＋ ゴールド
+  </button>
+
+  <button class="theme-btn" data-theme="D" onclick="applyTheme('D')">
+    <span class="swatch" style="background:#e2e8f0"></span>
+    <span class="tag">D</span>
+    黒 ＋ ホワイト
+  </button>
+
+  <span style="margin-left:auto;color:var(--muted);font-size:10px">選択はブラウザに保存されます</span>
+</div>
 
 <main>
 
