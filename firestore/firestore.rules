@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Users own their data
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+
+      match /meals/{mealId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+
+      match /daily_summary/{date} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+
+    // Foods DB: authenticated read-only, no public write
+    match /foods/{janCode} {
+      allow read: if request.auth != null;
+      allow write: if false; // populated by Cloud Functions only
+    }
+
+    // Restaurant menus: authenticated read-only
+    match /restaurant_menus/{restaurantId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+
+      match /items/{itemId} {
+        allow read: if request.auth != null;
+        allow write: if false;
+      }
+    }
+  }
+}

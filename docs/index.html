@@ -465,10 +465,10 @@ window.addEventListener('DOMContentLoaded', () => {
 <header>
   <div>
     <h1>🍚 MESHILOG</h1>
-    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.9</div>
+    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v2.0</div>
   </div>
   <div class="ts">
-    <div><span class="dot"></span>Ph.0 ✅ 完了 → Ph.1 設計フェーズへ</div>
+    <div><span class="dot"></span>Ph.1 ✅ 完了 → Ph.2 コア開発 MVP へ</div>
     <div style="margin-top:4px">Updated: 2026-05-17</div>
   </div>
 </header>
@@ -513,39 +513,28 @@ window.addEventListener('DOMContentLoaded', () => {
   <div class="status-3col">
 
     <div class="status-box now">
-      <div class="stitle">🟢 NOW — Ph.1 設計フェーズ 進行中</div>
-      <h3 style="color:var(--accent)">🔨 Ph.1 着手中 — 設計67%完了</h3>
-      <div class="item">
-        <span class="num">✅</span>
-        <span>技術スタック確定：<b>Flutter + Firebase（無料・Windows対応）</b></span>
-      </div>
-      <div class="item">
-        <span class="num">✅</span>
-        <span>開発体制確定：<b>個人MVP先行</b></span>
-      </div>
-      <div class="item">
-        <span class="num">🔨</span>
-        <span>Firestoreスキーマ設計（栄養DB構造）</span>
-      </div>
-      <div class="item">
-        <span class="num">⬜</span>
-        <span>JANコードDB 選定・調査</span>
-      </div>
+      <div class="stitle">🟢 NOW — Ph.2 コア開発 MVP 開始</div>
+      <h3 style="color:var(--accent)">🚀 Ph.1 完了 → Ph.2 突入</h3>
+      <div class="item"><span class="num">✅</span><span>Flutter scaffold 全完成（18ファイル・全画面・全サービス）</span></div>
+      <div class="item"><span class="num">✅</span><span>Android / iOS 設定ファイル・GitHubActions CI 完備</span></div>
+      <div class="item"><span class="num">✅</span><span>Firestore セキュリティルール策定</span></div>
+      <div class="item"><span class="num">🔨</span><span>次：Flutter SDK インストール → <code>flutter pub get</code></span></div>
+      <div class="item"><span class="num">🔨</span><span>次：Firebase プロジェクト作成 → <code>flutterfire configure</code></span></div>
       <div style="margin-top:12px;font-size:11px;color:var(--accent)">
-        → Figmaワイヤーフレーム・開発環境構築へ
+        → setup_flutter.bat 実行でFlutter環境構築開始
       </div>
     </div>
 
     <div class="status-box next">
-      <div class="stitle">🟡 NEXT — 次のフェーズ（Ph.1）</div>
-      <h3 style="color:var(--yellow)">設計・UI/UX（Month 1〜2）</h3>
-      <div class="item"><span class="num">1</span><span>Figma でワイヤーフレーム作成</span></div>
-      <div class="item"><span class="num">2</span><span>技術スタック決定（SwiftUI 推奨）</span></div>
-      <div class="item"><span class="num">3</span><span>栄養DB スキーマ設計</span></div>
-      <div class="item"><span class="num">4</span><span>JANコードDB 調査・選定</span></div>
-      <div class="item"><span class="num">5</span><span>開発環境構築（Xcode / GitHub）</span></div>
+      <div class="stitle">🟡 NEXT — Ph.2 コア開発（Month 2〜4）</div>
+      <h3 style="color:var(--yellow)">コア機能実装（Flutter）</h3>
+      <div class="item"><span class="num">1</span><span>Firebase接続確認・Auth実装</span></div>
+      <div class="item"><span class="num">2</span><span>バーコードスキャン → 栄養素取得フロー完成</span></div>
+      <div class="item"><span class="num">3</span><span>食事記録 → Firestore保存フロー</span></div>
+      <div class="item"><span class="num">4</span><span>ダッシュボード Riverpodで実データ連携</span></div>
+      <div class="item"><span class="num">5</span><span>週次レポート 実データグラフ</span></div>
       <div style="margin-top:12px;font-size:11px;color:var(--yellow)">
-        ⏳ Ph.0 完了後に着手
+        ⏳ Flutter SDK + Firebase設定後に即開始
       </div>
     </div>
 
@@ -571,7 +560,7 @@ window.addEventListener('DOMContentLoaded', () => {
   <div class="overall-progress">
     <div class="label">
       <span>プロジェクト全体進捗（Ph.0〜Ph.8 / 全50タスク）</span>
-      <span class="pct-val">20% 完了</span>
+      <span class="pct-val">24% 完了</span>
     </div>
     <div class="bar"><div class="bar-fill" style="width:20%"></div></div>
     <div style="display:flex;gap:20px;margin-top:10px;font-size:11px;color:var(--muted)">
@@ -861,18 +850,18 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="stat-card">
       <div class="label">現在フェーズ</div>
-      <div class="value" style="color:var(--yellow)">Ph.0</div>
-      <div class="sub">コンセプト確定（67%）</div>
+      <div class="value" style="color:var(--accent)">Ph.2</div>
+      <div class="sub">コア開発 MVP 開始</div>
     </div>
     <div class="stat-card">
       <div class="label">完了タスク</div>
-      <div class="value" style="color:var(--green)">6</div>
-      <div class="sub">全49タスク中</div>
+      <div class="value" style="color:var(--green)">12</div>
+      <div class="sub">全50タスク中</div>
     </div>
     <div class="stat-card">
       <div class="label">残タスク</div>
-      <div class="value" style="color:var(--orange)">43</div>
-      <div class="sub">Ph.0 完了 → Ph.1 へ</div>
+      <div class="value" style="color:var(--orange)">38</div>
+      <div class="sub">Ph.1 完了 → Ph.2 へ</div>
     </div>
     <div class="stat-card">
       <div class="label">MVP目標</div>
@@ -939,42 +928,42 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
 
     <!-- Ph.1 -->
-    <div class="phase-card active">
+    <div class="phase-card done">
       <h3>
-        <span class="phase-num wip">Ph.1</span>
+        <span class="phase-num done">Ph.1</span>
         🎨 設計・UI/UX
-        <span class="badge now">進行中</span>
-        <span class="remaining-count">残 2</span>
+        <span class="badge" style="background:#0d2818;color:var(--green);border:1px solid var(--green)">✅ 完了</span>
+        <span class="remaining-count" style="color:var(--green)">6/6</span>
       </h3>
-      <div class="phase-date">Month 1〜2（2026年6月〜7月）</div>
-      <div class="phase-desc">技術スタック選定・Figma画面設計・栄養DBスキーマ設計。</div>
+      <div class="phase-date">Month 1〜2（2026年5月〜6月）</div>
+      <div class="phase-desc">技術スタック選定・UIモックアップ・栄養DBスキーマ・Flutterスキャフォールド完成。</div>
       <div class="task done"><span class="icon">✅</span><span>技術スタック決定：<b>Flutter + Firebase（Windows開発・iOS+Android対応・無料）</b></span></div>
-      <div class="task done"><span class="icon">✅</span><span>カロリー・PFCスキーマ設計（Firestoreスキーマ完成）</span></div>
+      <div class="task done"><span class="icon">✅</span><span>Firestoreスキーマ設計（5コレクション・セキュリティルール）</span></div>
       <div class="task done"><span class="icon">✅</span><span>JANコードDB 選定：Open Food Facts + 文科省DB（無料）</span></div>
-      <div class="task done"><span class="icon">✅</span><span>プロジェクト構造設計（SwiftUI / GitHub CI 含む）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>Figma にて主要画面ワイヤーフレーム作成</span></div>
-      <div class="task"><span class="icon">⬜</span><span>開発環境構築（Xcode ローカルセットアップ）</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
-      <div class="pct">4/6 — 67%</div>
+      <div class="task done"><span class="icon">✅</span><span>UIモックアップ作成（ダッシュボード・スキャナー・レポート・決済通知）</span></div>
+      <div class="task done"><span class="icon">✅</span><span>Flutter scaffold 全完成（5画面・4モデル・4サービス・18ファイル）</span></div>
+      <div class="task done"><span class="icon">✅</span><span>Android / iOS 設定・GitHub Actions CI（Flutter）完備</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <div class="pct">6/6 — 100%</div>
     </div>
 
     <!-- Ph.2 -->
-    <div class="phase-card">
+    <div class="phase-card active">
       <h3>
-        <span class="phase-num future">Ph.2</span>
+        <span class="phase-num wip">Ph.2</span>
         📱 コア開発 MVP
-        <span class="badge future">予定</span>
+        <span class="badge now">進行中</span>
         <span class="remaining-count">残 7</span>
       </h3>
-      <div class="phase-date">Month 2〜4（2026年7月〜9月）</div>
-      <div class="phase-desc">SwiftUI アプリ骨格・バーコードスキャン・基本栄養トラッキング実装。</div>
-      <div class="task"><span class="icon">⬜</span><span>SwiftUI アプリ骨格（画面遷移・タブ）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>バーコードスキャナー実装（AVFoundation）</span></div>
-      <div class="task"><span class="icon">⬜</span><span>JANコード → 栄養素DB検索</span></div>
-      <div class="task"><span class="icon">⬜</span><span>食事記録・一覧表示機能</span></div>
-      <div class="task"><span class="icon">⬜</span><span>栄養ダッシュボード（今日の栄養収支）実装</span></div>
-      <div class="task"><span class="icon">⬜</span><span>ローカルDB（Core Data / SQLite）実装</span></div>
-      <div class="task"><span class="icon">⬜</span><span>TestFlight 内部テスト開始</span></div>
+      <div class="phase-date">Month 2〜4（2026年6月〜9月）</div>
+      <div class="phase-desc">Flutter実機接続・Firebase設定・バーコードスキャン・基本栄養トラッキング実装。</div>
+      <div class="task"><span class="icon">⬜</span><span>Flutter SDK インストール + <code>flutter pub get</code></span></div>
+      <div class="task"><span class="icon">⬜</span><span>Firebase プロジェクト作成 + <code>flutterfire configure</code></span></div>
+      <div class="task"><span class="icon">⬜</span><span>Auth（メール認証）動作確認</span></div>
+      <div class="task"><span class="icon">⬜</span><span>バーコードスキャン → Open Food Facts → Firestore保存フロー</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ダッシュボード Riverpod実データ連携</span></div>
+      <div class="task"><span class="icon">⬜</span><span>食事記録 CRUD 完全実装</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Codemagic iOS ビルド → TestFlight 内部配布</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
       <div class="pct">0/7 — 0%</div>
     </div>
