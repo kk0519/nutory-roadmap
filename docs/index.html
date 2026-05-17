@@ -246,11 +246,181 @@
     background: var(--accent); color: #000;
   }
 
+  /* ─── iPhone Mockup ─── */
+  .mockup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px; align-items: start;
+  }
+  .mockup-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .mockup-label {
+    font-size: 11px; color: var(--muted); letter-spacing: 1px;
+    text-transform: uppercase; text-align: center;
+  }
+  .mockup-sublabel {
+    font-size: 10px; color: var(--muted); text-align: center; margin-top: -8px;
+  }
+  .iphone {
+    width: 200px;
+    background: #000;
+    border-radius: 36px;
+    border: 2px solid #3a3a3c;
+    box-shadow: 0 0 0 1px #1c1c1e, 0 20px 60px rgba(0,0,0,.6);
+    overflow: hidden;
+    position: relative;
+  }
+  .iphone-notch {
+    background: #000;
+    height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .iphone-notch .pill {
+    background: #1c1c1e; border-radius: 20px;
+    width: 80px; height: 22px;
+  }
+  .iphone-screen {
+    background: #0d1117;
+    min-height: 360px;
+    padding: 0;
+    overflow: hidden;
+    font-family: -apple-system, 'Helvetica Neue', sans-serif;
+  }
+  .iphone-home {
+    background: #000; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .iphone-home .bar {
+    background: #3a3a3c; border-radius: 4px; width: 80px; height: 4px;
+  }
+
+  /* screen contents */
+  .sc-header {
+    padding: 10px 14px 8px;
+    font-size: 10px; font-weight: bold; color: var(--text);
+    border-bottom: 1px solid #21262d;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .sc-title { font-size: 13px; font-weight: bold; color: var(--accent); }
+  .sc-date  { font-size: 9px; color: var(--muted); }
+  .sc-body  { padding: 10px 14px; }
+
+  /* nutrient bars */
+  .nut-row { margin-bottom: 9px; }
+  .nut-label { display: flex; justify-content: space-between;
+    font-size: 9px; color: var(--muted); margin-bottom: 3px; }
+  .nut-label span:last-child { color: var(--text); font-weight: bold; }
+  .nut-bar { background: #21262d; border-radius: 3px; height: 5px; }
+  .nut-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .nut-fill.warn { background: var(--orange); }
+
+  /* cal ring */
+  .cal-ring-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .cal-ring {
+    width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0;
+    background: conic-gradient(var(--accent) 0% 79%, #21262d 79% 100%);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .cal-ring::after {
+    content: ''; position: absolute;
+    width: 40px; height: 40px; border-radius: 50%; background: #0d1117;
+  }
+  .cal-ring-val {
+    position: relative; z-index: 1; font-size: 10px;
+    font-weight: bold; color: var(--accent);
+  }
+  .cal-info { font-size: 9px; }
+  .cal-info .big { font-size: 16px; font-weight: bold; color: var(--text); }
+  .cal-info .sub { color: var(--muted); }
+
+  /* scan screen */
+  .scan-view {
+    background: #000; height: 120px; margin: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .scan-corner {
+    position: absolute; width: 30px; height: 30px; border-color: var(--accent); border-style: solid;
+    border-width: 0;
+  }
+  .scan-corner.tl { top: 14px; left: 50px; border-top-width: 2px; border-left-width: 2px; }
+  .scan-corner.tr { top: 14px; right: 50px; border-top-width: 2px; border-right-width: 2px; }
+  .scan-corner.bl { bottom: 14px; left: 50px; border-bottom-width: 2px; border-left-width: 2px; }
+  .scan-corner.br { bottom: 14px; right: 50px; border-bottom-width: 2px; border-right-width: 2px; }
+  .scan-line {
+    position: absolute; width: 90px; height: 1px;
+    background: var(--accent); opacity: .7;
+    animation: scanmove 2s linear infinite;
+  }
+  @keyframes scanmove {
+    0%   { top: 20px; }
+    50%  { top: 90px; }
+    100% { top: 20px; }
+  }
+  .scan-label { font-size: 8px; color: var(--muted); text-align: center; padding: 6px 14px; }
+
+  .product-card {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 8px 10px; margin: 0 14px 8px;
+  }
+  .product-name { font-size: 10px; font-weight: bold; color: var(--text); }
+  .product-meta { font-size: 8px; color: var(--muted); margin-top: 2px; }
+  .product-nums {
+    display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap;
+  }
+  .pnum { background: #0d1117; border-radius: 4px; padding: 2px 5px;
+    font-size: 8px; text-align: center; }
+  .pnum .k { color: var(--muted); font-size: 7px; }
+  .pnum .v { color: var(--accent); font-weight: bold; }
+
+  /* notification card */
+  .notif-card {
+    background: #161b22; border-left: 2px solid var(--accent);
+    border-radius: 6px; padding: 8px 10px; margin: 0 14px 8px;
+  }
+  .notif-top { display: flex; gap: 6px; align-items: center; margin-bottom: 4px; }
+  .notif-icon { font-size: 14px; }
+  .notif-title { font-size: 9px; font-weight: bold; color: var(--text); }
+  .notif-time  { font-size: 8px; color: var(--muted); margin-left: auto; }
+  .notif-body  { font-size: 9px; color: var(--muted); }
+  .notif-btn {
+    margin-top: 6px; background: var(--accent); color: #000;
+    border: none; border-radius: 4px; padding: 3px 10px;
+    font-size: 9px; font-weight: bold; cursor: pointer; width: 100%;
+    font-family: inherit;
+  }
+
+  /* report screen */
+  .report-week { display: flex; gap: 4px; margin-bottom: 10px; }
+  .rday {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; gap: 3px;
+  }
+  .rday .dname { font-size: 7px; color: var(--muted); }
+  .rday .dbar-wrap { height: 50px; display: flex; align-items: flex-end; width: 100%; }
+  .rday .dbar {
+    width: 100%; border-radius: 2px 2px 0 0;
+    background: var(--accent); opacity: .7;
+  }
+  .rday.today .dbar { opacity: 1; }
+  .rday .dval { font-size: 7px; color: var(--muted); }
+  .report-summary {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+  }
+  .rscard {
+    background: #161b22; border-radius: 6px; padding: 7px 8px;
+  }
+  .rscard .rsk { font-size: 8px; color: var(--muted); }
+  .rscard .rsv { font-size: 13px; font-weight: bold; color: var(--accent); }
+  .rscard .rss { font-size: 8px; color: var(--muted); }
+
   @media (max-width: 768px) {
     .status-3col { grid-template-columns: 1fr; }
     main { padding: 16px; }
     header { padding: 12px 16px; }
     .theme-bar { flex-wrap: wrap; padding: 10px 16px; }
+    .mockup-grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 
@@ -295,7 +465,7 @@ window.addEventListener('DOMContentLoaded', () => {
 <header>
   <div>
     <h1>🍚 MESHILOG</h1>
-    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.2</div>
+    <div class="sub">メシログ — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.5</div>
   </div>
   <div class="ts">
     <div><span class="dot"></span>Ph.0 ✅ 完了 → Ph.1 設計フェーズへ</div>
@@ -350,9 +520,8 @@ window.addEventListener('DOMContentLoaded', () => {
         <span>マネタイズ確定：<b>freemium（¥480/月）</b></span>
       </div>
       <div class="item">
-        <span class="num">⬜</span>
-        <span><b>UIデザインカラー選択</b>（黒ベース確定・色調のみ未決）<br>
-        → AI推奨：黒＋エメラルドグリーン</span>
+        <span class="num">✅</span>
+        <span><b>UIデザインカラー確定</b>：黒 ＋ エメラルドグリーン（A）</span>
       </div>
       <div class="item">
         <span class="num">⬜</span>
@@ -457,20 +626,11 @@ window.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
 
-    <div class="decision-card open">
-      <div class="dlabel">❓ 要決定</div>
-      <div class="dtitle">UIデザインカラー（黒ベース・シック系）</div>
-      <div class="dval" style="color:var(--yellow)">方針確定 → 色調選択待ち</div>
-      <div class="dai">
-        方針：<b>黒ベース・シック・管理アプリ感</b>（確定）<br><br>
-        選択肢：<br>
-        A) 黒 ＋ <span style="color:#22c55e">■</span> <b>エメラルドグリーン</b>（健康×洗練・このサイトと同系）<br>
-        B) 黒 ＋ <span style="color:#f97316">■</span> <b>アンバーオレンジ</b>（食×プレミアム感）<br>
-        C) 黒 ＋ <span style="color:#facc15">■</span> <b>ゴールド</b>（最高級・ラグジュアリー管理）<br>
-        D) 黒 ＋ <span style="color:#e2e8f0">■</span> <b>ホワイト</b>（ミニマル・モノトーン）<br><br>
-        → <b style="color:var(--teal)">AI推奨：A) 黒＋エメラルドグリーン</b><br>
-        理由：栄養・健康のイメージカラー（緑）×シック管理アプリを両立。あすけん（白系）・カロミル（青系）との差別化にもなる。
-      </div>
+    <div class="decision-card done">
+      <div class="dlabel">✅ 確定済み</div>
+      <div class="dtitle">UIデザインカラー</div>
+      <div class="dval">黒 ＋ <span style="color:#22c55e">■</span> エメラルドグリーン（A）</div>
+      <div class="dai">確定日：2026-05-17 &nbsp;|&nbsp; 健康×洗練。あすけん（白系）・カロミル（青系）との明確な差別化</div>
     </div>
 
     <div class="decision-card open">
@@ -520,6 +680,182 @@ window.addEventListener('DOMContentLoaded', () => {
       <div class="kv-item"><div class="k">App Store目標</div><div class="v">2027年3月（Month 10）</div></div>
     </div>
   </div>
+
+  <!-- ══════════════════════════════════
+       アプリ モックアップ
+  ══════════════════════════════════ -->
+  <div class="section-title">📱 アプリ画面イメージ（モック）</div>
+  <div class="mockup-grid">
+
+    <!-- Screen 1: Dashboard -->
+    <div class="mockup-wrap">
+      <div class="mockup-label">01 &mdash; ダッシュボード</div>
+      <div class="mockup-sublabel">今日の栄養収支</div>
+      <div class="iphone">
+        <div class="iphone-notch"><div class="pill"></div></div>
+        <div class="iphone-screen">
+          <div class="sc-header">
+            <span class="sc-title">今日の栄養収支</span>
+            <span class="sc-date">2026-05-17 (土)</span>
+          </div>
+          <div class="sc-body">
+            <div class="cal-ring-wrap">
+              <div class="cal-ring"><span class="cal-ring-val">79%</span></div>
+              <div class="cal-info">
+                <div class="big">1,580</div>
+                <div class="sub">/ 2,000 kcal</div>
+                <div class="sub" style="margin-top:4px;color:var(--accent);font-size:9px">残 420 kcal</div>
+              </div>
+            </div>
+            <div class="nut-row">
+              <div class="nut-label"><span>たんぱく質</span><span>68 / 80g</span></div>
+              <div class="nut-bar"><div class="nut-fill" style="width:85%"></div></div>
+            </div>
+            <div class="nut-row">
+              <div class="nut-label"><span>脂質</span><span>58 / 65g</span></div>
+              <div class="nut-bar"><div class="nut-fill warn" style="width:89%"></div></div>
+            </div>
+            <div class="nut-row">
+              <div class="nut-label"><span>炭水化物</span><span>185 / 260g</span></div>
+              <div class="nut-bar"><div class="nut-fill" style="width:71%"></div></div>
+            </div>
+            <div class="nut-row">
+              <div class="nut-label"><span>食物繊維</span><span>8 / 20g</span></div>
+              <div class="nut-bar"><div class="nut-fill" style="width:40%"></div></div>
+            </div>
+            <div style="margin-top:10px;font-size:9px;color:var(--muted);border-top:1px solid #21262d;padding-top:8px">
+              🤖 AI: 食物繊維が不足気味です。夕食に野菜を追加しましょう。
+            </div>
+          </div>
+        </div>
+        <div class="iphone-home"><div class="bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Screen 2: Barcode Scan -->
+    <div class="mockup-wrap">
+      <div class="mockup-label">02 &mdash; バーコードスキャン</div>
+      <div class="mockup-sublabel">コンビニ商品を即記録</div>
+      <div class="iphone">
+        <div class="iphone-notch"><div class="pill"></div></div>
+        <div class="iphone-screen">
+          <div class="sc-header">
+            <span class="sc-title">スキャン</span>
+            <span class="sc-date" style="color:var(--accent)">🔴 認識中</span>
+          </div>
+          <div class="scan-view">
+            <div class="scan-corner tl"></div>
+            <div class="scan-corner tr"></div>
+            <div class="scan-corner bl"></div>
+            <div class="scan-corner br"></div>
+            <div class="scan-line"></div>
+          </div>
+          <div class="scan-label">商品のバーコードをかざしてください</div>
+          <div class="product-card">
+            <div class="product-name">✅ セブンプレミアム</div>
+            <div class="product-meta">サラダチキンプレーン 115g &nbsp;|&nbsp; セブンイレブン</div>
+            <div class="product-nums">
+              <div class="pnum"><div class="k">カロリー</div><div class="v" style="color:var(--accent)">116kcal</div></div>
+              <div class="pnum"><div class="k">P</div><div class="v">24.7g</div></div>
+              <div class="pnum"><div class="k">F</div><div class="v">1.3g</div></div>
+              <div class="pnum"><div class="k">C</div><div class="v">0g</div></div>
+            </div>
+          </div>
+          <div style="padding:0 14px">
+            <button class="notif-btn">＋ 今日の記録に追加</button>
+          </div>
+          <div class="sc-body" style="padding-top:8px">
+            <div style="font-size:9px;color:var(--muted)">最近スキャン: おにぎり（鮭）/ カフェラテ</div>
+          </div>
+        </div>
+        <div class="iphone-home"><div class="bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Screen 3: PayPay auto-link -->
+    <div class="mockup-wrap">
+      <div class="mockup-label">03 &mdash; PayPay自動連携</div>
+      <div class="mockup-sublabel">決済検知→1タップ記録</div>
+      <div class="iphone">
+        <div class="iphone-notch"><div class="pill"></div></div>
+        <div class="iphone-screen">
+          <div class="sc-header">
+            <span class="sc-title">自動連携通知</span>
+            <span class="sc-date">just now</span>
+          </div>
+          <div class="sc-body">
+            <div style="font-size:9px;color:var(--muted);margin-bottom:10px">
+              💡 決済を自動検知しました。タップして記録を完了できます。
+            </div>
+            <div class="notif-card">
+              <div class="notif-top">
+                <span class="notif-icon">💳</span>
+                <span class="notif-title">PayPay 決済を検知</span>
+                <span class="notif-time">12:34</span>
+              </div>
+              <div class="notif-body">ファミリーマート &nbsp;¥ 756</div>
+              <div class="notif-body" style="margin-top:3px;color:var(--accent)">チキン南蛮弁当 + お茶 を検索中…</div>
+              <button class="notif-btn">✅ 1タップで栄養を記録する</button>
+            </div>
+            <div class="notif-card" style="margin-top:0;opacity:.6">
+              <div class="notif-top">
+                <span class="notif-icon">🏪</span>
+                <span class="notif-title">ローソン 購入履歴</span>
+                <span class="notif-time">8:15</span>
+              </div>
+              <div class="notif-body">ブランパン ×2 &nbsp;¥ 320</div>
+              <div class="notif-body" style="margin-top:3px;color:var(--green)">✅ 記録済み（232kcal）</div>
+            </div>
+            <div style="margin-top:10px;font-size:9px;color:var(--muted);text-align:center">
+              本日 自動記録：<b style="color:var(--accent)">3件 / 4食</b>（手動入力 1件のみ）
+            </div>
+          </div>
+        </div>
+        <div class="iphone-home"><div class="bar"></div></div>
+      </div>
+    </div>
+
+    <!-- Screen 4: Weekly Report -->
+    <div class="mockup-wrap">
+      <div class="mockup-label">04 &mdash; 週次レポート</div>
+      <div class="mockup-sublabel">栄養傾向を自動分析</div>
+      <div class="iphone">
+        <div class="iphone-notch"><div class="pill"></div></div>
+        <div class="iphone-screen">
+          <div class="sc-header">
+            <span class="sc-title">週次レポート</span>
+            <span class="sc-date">5/11 — 5/17</span>
+          </div>
+          <div class="sc-body">
+            <div style="font-size:9px;color:var(--muted);margin-bottom:8px">平均カロリー / 日</div>
+            <div class="report-week">
+              <div class="rday"><span class="dname">月</span><div class="dbar-wrap"><div class="dbar" style="height:65%"></div></div><span class="dval">1820</span></div>
+              <div class="rday"><span class="dname">火</span><div class="dbar-wrap"><div class="dbar" style="height:50%"></div></div><span class="dval">1540</span></div>
+              <div class="rday"><span class="dname">水</span><div class="dbar-wrap"><div class="dbar" style="height:80%"></div></div><span class="dval">2050</span></div>
+              <div class="rday"><span class="dname">木</span><div class="dbar-wrap"><div class="dbar" style="height:45%"></div></div><span class="dval">1480</span></div>
+              <div class="rday"><span class="dname">金</span><div class="dbar-wrap"><div class="dbar" style="height:90%"></div></div><span class="dval">2180</span></div>
+              <div class="rday"><span class="dname">土</span><div class="dbar-wrap"><div class="dbar" style="height:55%"></div></div><span class="dval">1650</span></div>
+              <div class="rday today"><span class="dname" style="color:var(--accent)">日</span><div class="dbar-wrap"><div class="dbar" style="height:63%"></div></div><span class="dval" style="color:var(--accent)">1580</span></div>
+            </div>
+            <div style="background:#21262d;border-radius:3px;height:2px;margin-bottom:10px;position:relative">
+              <div style="position:absolute;top:-4px;left:0;right:0;height:10px;display:flex;align-items:center">
+                <div style="width:100%;height:1px;background:var(--accent);opacity:.3"></div>
+                <span style="position:absolute;right:0;font-size:7px;color:var(--accent);white-space:nowrap">目標 2000</span>
+              </div>
+            </div>
+            <div class="report-summary">
+              <div class="rscard"><div class="rsk">平均カロリー</div><div class="rsv">1,757</div><div class="rss">kcal / 日</div></div>
+              <div class="rscard"><div class="rsk">たんぱく質達成率</div><div class="rsv" style="color:var(--accent)">91%</div><div class="rss">週平均</div></div>
+              <div class="rscard"><div class="rsk">自動記録率</div><div class="rsv" style="color:var(--accent)">84%</div><div class="rss">手動 16%のみ</div></div>
+              <div class="rscard"><div class="rsk">食物繊維不足</div><div class="rsv" style="color:var(--orange)">5日</div><div class="rss">/ 7日</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="iphone-home"><div class="bar"></div></div>
+      </div>
+    </div>
+
+  </div><!-- /mockup-grid -->
 
   <!-- ══════════════════════════════════
        サマリーstat
@@ -775,7 +1111,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </main>
 
 <footer>
-  <span>PROJECT NutriLedger v1.3 &nbsp;—&nbsp; Meshilog（メシログ）App Roadmap</span>
+  <span>PROJECT NutriLedger v1.5 &nbsp;—&nbsp; Meshilog（メシログ）App Roadmap</span>
   <span>Target: iPhone / iOS &nbsp;|&nbsp; Last updated: 2026-05-17</span>
 </footer>
 
