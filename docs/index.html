@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🥗 Nutory — Project Roadmap</title>
+<style>
+  :root {
+    --bg:      #0d1117;
+    --card:    #161b22;
+    --border:  #30363d;
+    --text:    #e6edf3;
+    --muted:   #8b949e;
+    --accent:  #22c55e;
+    --green:   #3fb950;
+    --yellow:  #d29922;
+    --red:     #ff7b72;
+    --orange:  #f97316;
+    --teal:    #2dd4bf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Courier New', 'Menlo', monospace;
+    font-size: 13px; line-height: 1.6;
+  }
+  a { color: var(--accent); text-decoration: none; }
+
+  header {
+    background: var(--card); border-bottom: 1px solid var(--border);
+    padding: 16px 32px; display: flex; align-items: center; gap: 16px;
+  }
+  header h1 { font-size: 22px; color: var(--accent); letter-spacing: 3px; }
+  header .sub { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  header .ts  { margin-left: auto; color: var(--muted); font-size: 11px; text-align:right; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+         background: var(--accent); animation: pulse 2s infinite; margin-right: 6px; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+  main { max-width: 1400px; margin: 0 auto; padding: 24px 32px; }
+
+  .section-title {
+    color: var(--muted); font-size: 11px; letter-spacing: 1px;
+    text-transform: uppercase; margin: 28px 0 12px;
+    border-bottom: 1px solid var(--border); padding-bottom: 6px;
+  }
+
+  /* Stat cards */
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .stat-card .label { color: var(--muted); font-size: 11px; margin-bottom: 6px; }
+  .stat-card .value { font-size: 26px; font-weight: bold; color: var(--accent); }
+  .stat-card .sub   { color: var(--muted); font-size: 11px; margin-top: 4px; }
+
+  /* Phase cards */
+  .phase-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;
+  }
+  .phase-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 20px; position: relative;
+  }
+  .phase-card.active { border-color: var(--accent); }
+  .phase-card.done   { border-color: #238636; opacity: 0.85; }
+  .phase-card h3 {
+    font-size: 13px; margin-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .phase-num {
+    border-radius: 4px; padding: 1px 7px;
+    font-size: 11px; font-weight: bold;
+    background: var(--accent); color: #000;
+  }
+  .phase-num.wip  { background: var(--yellow); color: #000; }
+  .phase-num.done { background: var(--green);  color: #000; }
+  .phase-num.future { background: var(--border); color: var(--muted); }
+
+  .phase-desc {
+    color: var(--muted); font-size: 11px;
+    margin-bottom: 12px; line-height: 1.7;
+  }
+  .phase-date {
+    font-size: 10px; color: var(--teal);
+    margin-bottom: 10px;
+  }
+
+  .task { display: flex; align-items: flex-start; gap: 8px; padding: 3px 0;
+          color: var(--muted); font-size: 12px; }
+  .task.done { color: var(--text); }
+  .task .icon { flex-shrink: 0; margin-top: 1px; }
+  .task.done .icon { color: var(--green); }
+  .task.wip  .icon { color: var(--yellow); }
+
+  .progress-bar {
+    background: var(--border); border-radius: 4px; height: 4px; margin-top: 14px;
+  }
+  .progress-fill {
+    background: var(--accent); border-radius: 4px; height: 100%;
+    transition: width .5s ease;
+  }
+  .pct { color: var(--muted); font-size: 10px; margin-top: 4px; text-align: right; }
+
+  /* Badge */
+  .badge {
+    display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 12px;
+    margin-left: 6px; font-weight: bold;
+  }
+  .badge.now    { background: #1a4731; color: var(--green); border: 1px solid var(--green); }
+  .badge.next   { background: #2d2000; color: var(--yellow); border: 1px solid var(--yellow); }
+  .badge.future { background: #1c1c2e; color: var(--teal); border: 1px solid var(--teal); }
+
+  /* Concept box */
+  .concept-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px; padding: 20px 24px; margin-bottom: 8px;
+  }
+  .concept-box h2 { color: var(--accent); font-size: 16px; margin-bottom: 10px; }
+  .concept-box p  { color: var(--muted); font-size: 12px; line-height: 1.9; }
+  .concept-box .kv { display: flex; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+  .concept-box .kv-item { background: #0d1117; border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 14px; font-size: 12px; }
+  .concept-box .kv-item .k { color: var(--muted); font-size: 10px; margin-bottom: 2px; }
+  .concept-box .kv-item .v { color: var(--text); font-weight: bold; }
+
+  /* Timeline bar */
+  .timeline {
+    display: flex; gap: 0; margin-bottom: 8px; border-radius: 6px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .tl-seg {
+    height: 28px; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: bold; flex-shrink: 0;
+  }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 16px 32px;
+    display: flex; justify-content: space-between;
+    color: var(--muted); font-size: 11px; margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>🥗 NUTORY</h1>
+    <div class="sub">ニュートリー — 栄養の家計簿アプリ &nbsp;|&nbsp; Project Roadmap v1.0</div>
+  </div>
+  <div class="ts">
+    <div><span class="dot"></span>Planning Phase</div>
+    <div style="margin-top:4px">Updated: 2026-05-17</div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Concept -->
+  <div class="section-title">プロジェクト概要</div>
+  <div class="concept-box">
+    <h2>栄養の家計簿 — Nutory（ニュートリー）</h2>
+    <p>
+      マネーフォワードが「銀行・クレカ連携で家計を自動管理」したように、<br>
+      Nutory は「コンビニ・QR決済・外食チェーン連携で栄養を自動管理」する。<br>
+      日本のコンビニ文化・キャッシュレス普及を武器に、世界で最も自動化されたカロリー・栄養素トラッカーを目指す。
+    </p>
+    <div class="kv">
+      <div class="kv-item"><div class="k">アプリ名（仮）</div><div class="v">Nutory（ニュートリー）</div></div>
+      <div class="kv-item"><div class="k">プロジェクト名</div><div class="v">NutriLedger</div></div>
+      <div class="kv-item"><div class="k">ターゲット</div><div class="v">一人暮らし 20-30代（先行）</div></div>
+      <div class="kv-item"><div class="k">プラットフォーム</div><div class="v">iPhone（iOS） → Android</div></div>
+      <div class="kv-item"><div class="k">差別化</div><div class="v">コンビニ3社 + PayPay/LINE Pay 自動連携</div></div>
+      <div class="kv-item"><div class="k">目標自動化率</div><div class="v">食事記録の 80%以上</div></div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="section-title">マイルストーン サマリー</div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="label">総フェーズ数</div>
+      <div class="value">9</div>
+      <div class="sub">Ph.0 〜 Ph.8</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">現在フェーズ</div>
+      <div class="value" style="color:var(--yellow)">Ph.0</div>
+      <div class="sub">コンセプト確定</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">MVP目標</div>
+      <div class="value">3ヶ月</div>
+      <div class="sub">Ph.1〜Ph.2完了</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">App Store 申請目標</div>
+      <div class="value">10ヶ月</div>
+      <div class="sub">Ph.5 ローンチ</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Android 対応</div>
+      <div class="value">18ヶ月</div>
+      <div class="sub">Ph.8 マルチプラット</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">完了タスク</div>
+      <div class="value" style="color:var(--green)">3</div>
+      <div class="sub">全体の 5%</div>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="section-title">タイムライン（概算）</div>
+  <div class="timeline">
+    <div class="tl-seg" style="width:6%;background:#1a4731;color:var(--green)">Ph.0<br><span style="font-size:9px">M0-1</span></div>
+    <div class="tl-seg" style="width:11%;background:#2d2000;color:var(--yellow)">Ph.1<br><span style="font-size:9px">M1-2</span></div>
+    <div class="tl-seg" style="width:17%;background:#1c1c2e;color:var(--teal)">Ph.2<br><span style="font-size:9px">M2-4</span></div>
+    <div class="tl-seg" style="width:17%;background:#1c1c2e;color:var(--teal)">Ph.3<br><span style="font-size:9px">M4-6</span></div>
+    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.4<br><span style="font-size:9px">M6-8</span></div>
+    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.5<br><span style="font-size:9px">M8-10</span></div>
+    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.6<br><span style="font-size:9px">M10-13</span></div>
+    <div class="tl-seg" style="width:11%;background:#1c1c2e;color:var(--teal)">Ph.7<br><span style="font-size:9px">M13-16</span></div>
+    <div class="tl-seg" style="width:5%;background:#1c1c2e;color:var(--teal)">Ph.8<br><span style="font-size:9px">M16+</span></div>
+  </div>
+
+  <!-- Phases -->
+  <div class="section-title">フェーズ詳細</div>
+  <div class="phase-grid">
+
+    <!-- Ph.0 -->
+    <div class="phase-card done">
+      <h3>
+        <span class="phase-num done">Ph.0</span>
+        🔍 コンセプト確定 <span class="badge now">✅ 完了</span>
+      </h3>
+      <div class="phase-date">Month 0〜1（2026年5月）</div>
+      <div class="phase-desc">市場調査・競合分析・ターゲット定義・アプリコンセプトの確定フェーズ。</div>
+      <div class="task done"><span class="icon">✅</span><span>市場調査：日本の栄養管理アプリの現状分析</span></div>
+      <div class="task done"><span class="icon">✅</span><span>競合分析：あすけん・カロミル・MyFitnessPalの弱点特定</span></div>
+      <div class="task done"><span class="icon">✅</span><span>ターゲット確定：一人暮らし20-30代 → 家族プランはv2</span></div>
+      <div class="task done"><span class="icon">✅</span><span>差別化コンセプト確定：コンビニ×QR決済×栄養自動化</span></div>
+      <div class="task"><span class="icon">⬜</span><span>アプリ名（仮）最終確定：Nutory（ニュートリー）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>マネタイズモデル決定（月額/freemium）</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:67%"></div></div>
+      <div class="pct">4/6 — 67%</div>
+    </div>
+
+    <!-- Ph.1 -->
+    <div class="phase-card active">
+      <h3>
+        <span class="phase-num wip">Ph.1</span>
+        🎨 設計・UI/UX <span class="badge next">🔜 次フェーズ</span>
+      </h3>
+      <div class="phase-date">Month 1〜2（2026年6月〜7月）</div>
+      <div class="phase-desc">技術スタック選定・Figmaによる画面設計・栄養DBの構造設計。</div>
+      <div class="task"><span class="icon">⬜</span><span>技術スタック決定（SwiftUI + Swift / バックエンド設計）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Figmaにて主要画面のワイヤーフレーム作成</span></div>
+      <div class="task"><span class="icon">⬜</span><span>カロリー・PFC（タンパク質/脂質/炭水化物）DBスキーマ設計</span></div>
+      <div class="task"><span class="icon">⬜</span><span>JANコード（バーコード）DBの調査・採用候補選定</span></div>
+      <div class="task"><span class="icon">⬜</span><span>「栄養の家計簿ダッシュボード」UI設計</span></div>
+      <div class="task"><span class="icon">⬜</span><span>開発環境構築（Xcode / GitHub / CI）</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/6 — 0%</div>
+    </div>
+
+    <!-- Ph.2 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.2</span>
+        📱 コア開発（MVP）<span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 2〜4（2026年7月〜9月）</div>
+      <div class="phase-desc">SwiftUIによるiOSアプリ骨格・バーコードスキャン・基本栄養トラッキング機能の実装。</div>
+      <div class="task"><span class="icon">⬜</span><span>SwiftUI アプリ骨格構築（画面遷移・タブ構成）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>バーコードスキャナー実装（AVFoundation）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>JANコード→栄養素DB検索機能</span></div>
+      <div class="task"><span class="icon">⬜</span><span>食事記録・一覧表示機能</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養ダッシュボード（今日の栄養収支）実装</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ローカルDB（Core Data / SQLite）設計・実装</span></div>
+      <div class="task"><span class="icon">⬜</span><span>TestFlight内部テスト開始</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/7 — 0%</div>
+    </div>
+
+    <!-- Ph.3 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.3</span>
+        🔗 データ自動連携 <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 4〜6（2026年9月〜11月）</div>
+      <div class="phase-desc">マネフォ方式の核心：コンビニ・QR決済・外食チェーンとの自動連携実装。手動入力を80%削減。</div>
+      <div class="task"><span class="icon">⬜</span><span>セブン-イレブン（7iD / nanaco）購入履歴連携</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ファミリーマート（ファミペイ）購入履歴連携</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ローソン（Ponta）購入履歴連携</span></div>
+      <div class="task"><span class="icon">⬜</span><span>PayPay 決済連携（飲食店名検知 → 通知）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>LINE Pay 決済連携</span></div>
+      <div class="task"><span class="icon">⬜</span><span>外食チェーンDB構築（マクドナルド・松屋・吉野家等 top 30）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>GPS＋時刻による飲食店自動検出（「松屋にいますか？」通知）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Uber Eats / 出前館 注文履歴連携</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/8 — 0%</div>
+    </div>
+
+    <!-- Ph.4 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.4</span>
+        🧪 ベータテスト <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 6〜8（2026年11月〜2027年1月）</div>
+      <div class="phase-desc">TestFlight公開・ユーザフィードバック収集・DB精度向上・App Store準備。</div>
+      <div class="task"><span class="icon">⬜</span><span>TestFlight ベータ公開（招待制 50名）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ユーザフィードバック収集・分析</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養DB精度向上（誤認識・欠損データ修正）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>パフォーマンス最適化（バッテリー・通信量）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>App Storeメタデータ準備（説明文・スクリーンショット）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>プライバシーポリシー・利用規約作成</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/6 — 0%</div>
+    </div>
+
+    <!-- Ph.5 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.5</span>
+        🚀 App Store ローンチ <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 8〜10（2027年1月〜3月）</div>
+      <div class="phase-desc">v1.0 正式リリース。マーケティング・SNS展開・プレスリリース。</div>
+      <div class="task"><span class="icon">⬜</span><span>App Store 申請・審査対応</span></div>
+      <div class="task"><span class="icon">⬜</span><span>v1.0 正式リリース（無料 + Premiumプラン）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>SNSアカウント開設（X / Instagram）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>インフルエンサー・ヘルス系YouTuberへのPR</span></div>
+      <div class="task"><span class="icon">⬜</span><span>プレスリリース配信</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ASO（App Store最適化）対応</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/6 — 0%</div>
+    </div>
+
+    <!-- Ph.6 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.6</span>
+        📊 ユーザ継続・機能拡充 <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 10〜13（2027年3月〜6月）</div>
+      <div class="phase-desc">リテンション向上・週次レポート・目標設定機能の拡充。</div>
+      <div class="task"><span class="icon">⬜</span><span>週次・月次 栄養レポート自動生成</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養目標設定機能（ダイエット / 筋肉増量 / 健康維持）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>プッシュ通知（食事記録リマインダー・栄養アドバイス）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>写真AIによる食事認識機能（Vision API）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Apple Health 連携（歩数・消費カロリー）</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/5 — 0%</div>
+    </div>
+
+    <!-- Ph.7 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.7</span>
+        💰 マネタイズ強化 <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 13〜16（2027年6月〜9月）</div>
+      <div class="phase-desc">サブスクリプション最適化・家族プラン・外部パートナーシップ。</div>
+      <div class="task"><span class="icon">⬜</span><span>Premium月額プラン最適化（¥480/月 目標）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>家族プラン実装（¥680/月 〜 4名まで）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>ジム・フィットネスクラブとのパートナーシップ</span></div>
+      <div class="task"><span class="icon">⬜</span><span>栄養士・管理栄養士による監修コンテンツ追加</span></div>
+      <div class="task"><span class="icon">⬜</span><span>食品メーカー・コンビニとのタイアップ広告</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/5 — 0%</div>
+    </div>
+
+    <!-- Ph.8 -->
+    <div class="phase-card">
+      <h3>
+        <span class="phase-num future">Ph.8</span>
+        🌏 マルチプラットフォーム <span class="badge future">予定</span>
+      </h3>
+      <div class="phase-date">Month 16〜（2027年9月〜）</div>
+      <div class="phase-desc">Android版・Apple Watch・Web版・グローバル展開。</div>
+      <div class="task"><span class="icon">⬜</span><span>Android版開発（React Native or Flutter）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Apple Watch コンパニオンアプリ</span></div>
+      <div class="task"><span class="icon">⬜</span><span>Web版ダッシュボード（PC閲覧対応）</span></div>
+      <div class="task"><span class="icon">⬜</span><span>多言語対応（英語・中国語）→ グローバル展開</span></div>
+      <div class="task"><span class="icon">⬜</span><span>AI栄養アドバイザー機能（Claude API統合）</span></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div>
+      <div class="pct">0/5 — 0%</div>
+    </div>
+
+  </div><!-- /phase-grid -->
+
+  <!-- Questions section -->
+  <div class="section-title">未決定事項（オーナー判断待ち）</div>
+  <div class="concept-box" style="border-left-color: var(--yellow)">
+    <h2 style="color:var(--yellow)">📋 決定待ち項目</h2>
+    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">アプリ名：<b>Nutory（ニュートリー）</b>で確定？ → AI推奨：✅ 採用（短い・国際対応・ブランド化しやすい）</span></div>
+    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">マネタイズ：月額サブスク or freemium → AI推奨：<b>freemium先行</b>（初期ユーザ獲得優先）</span></div>
+    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">開発体制：個人開発 or チーム → AI推奨：<b>個人MVP先行</b>→ 市場反応後にチーム化</span></div>
+    <div class="task" style="padding:6px 0"><span class="icon" style="color:var(--yellow)">❓</span><span style="color:var(--text)">デザインカラー：緑系（健康）or オレンジ系（食欲）→ AI推奨：<b>緑ベース＋オレンジアクセント</b></span></div>
+  </div>
+
+</main>
+
+<footer>
+  <span>PROJECT NutriLedger v1.0 &nbsp;—&nbsp; Nutory App Roadmap</span>
+  <span>Target: iPhone / iOS &nbsp;|&nbsp; 2026-05-17</span>
+</footer>
+
+</body>
+</html>
